@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Petualangan Fisika 2D</title>
+    <!-- Load Firebase config FIRST -->
+    <script src="firebase-config.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600;900&display=swap" rel="stylesheet">
@@ -829,9 +831,21 @@
 
         // --- INIT ---
         window.onload = () => {
-            if (firebaseConfig) initFirebase();
-            else {
-                console.warn("Firebase config not found. Offline mode.");
+            // Parse Firebase config dari __firebase_config (dari firebase-config.js)
+            let firebaseConfig = null;
+            if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+                try {
+                    firebaseConfig = JSON.parse(__firebase_config);
+                    console.log("✅ Firebase config found!");
+                } catch (e) {
+                    console.error("❌ Error parsing Firebase config:", e);
+                }
+            }
+
+            if (firebaseConfig) {
+                initFirebase(firebaseConfig);
+            } else {
+                console.warn("⚠️ Firebase config not found. Running in Offline mode.");
                 userId = 'offline';
                 document.getElementById('leaderboard-list').innerHTML = '<li>Mode Offline</li>';
                 document.getElementById('btn-start').disabled = false;
@@ -864,20 +878,23 @@
             }
         }
 
-        async function initFirebase() {
+        async function initFirebase(config) {
             try {
-                const app = initializeApp(firebaseConfig);
+                console.log("🔄 Initializing Firebase with config...", config.projectId);
+                const app = initializeApp(config);
                 db = getFirestore(app);
                 auth = getAuth(app);
                 
                 onAuthStateChanged(auth, async (user) => {
                     if (user) {
                         userId = user.uid;
+                        console.log("✅ Firebase Auth success! User:", userId);
                         await loadPlayerData();
                     } else {
                         if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                             await signInWithCustomToken(auth, __initial_auth_token);
                         } else {
+                            console.log("🔐 Signing in anonymously...");
                             await signInAnonymously(auth);
                         }
                     }
