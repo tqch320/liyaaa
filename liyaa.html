@@ -847,7 +847,8 @@
             } else {
                 console.warn("⚠️ Firebase config not found. Running in Offline mode.");
                 userId = 'offline';
-                document.getElementById('leaderboard-list').innerHTML = '<li>Mode Offline</li>';
+                // Jangan tampilkan pesan offline, biarkan user bermain
+                document.getElementById('leaderboard-list').innerHTML = '<li class="p-1 bg-white border border-black rounded text-center text-gray-500 italic">Leaderboard tidak tersedia</li>';
                 document.getElementById('btn-start').disabled = false;
                 document.getElementById('btn-start').classList.remove('opacity-50', 'cursor-not-allowed');
             }
