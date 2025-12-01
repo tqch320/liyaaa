@@ -687,9 +687,48 @@
             gates: [],
             // --- URUTAN LEVEL BARU (MUDAH -> SUSAH) ---
             checkpoints: [
-                // LEVEL 1: TUMBUKAN TIDAK LENTING (MOBIL & BECAK) - VISUAL TABRAKAN
+                // LEVEL 1: HITUNGAN MOMENTUM DASAR (p = mv) - PALING MUDAH
                 { 
-                    id: 1, x: 1000, type: 'calc', visual: 'accident', 
+                    id: 1, x: 1000, type: 'calc', visual: 'river', 
+                    question: "Jembatan putus! Mobil bermassa 1.500 kg melaju dengan kecepatan 20 m/s. Hitung momentum mobil tersebut!", 
+                    sim: {}, 
+                    options: { 
+                        input: { correctValue: 30000, tolerance: 0 }, 
+                        feedback: { correct: "Tepat! P = m.v", wrong: "Rumus: p = massa x kecepatan" }, 
+                        explanation: "p = 1500 kg * 20 m/s = 30.000 kg.m/s" 
+                    } 
+                },
+
+                // LEVEL 2: HITUNGAN IMPULS DASAR (I = F.dt) - MUDAH
+                { 
+                    id: 2, x: 2000, type: 'calc', visual: 'cliff', 
+                    question: "Tebing Es! Tahan tubuhmu dengan gaya 200 N selama 5 detik agar tidak jatuh. Berapa IMPULS yang kamu kerjakan?", 
+                    sim: {}, 
+                    options: { 
+                        input: { correctValue: 1000, tolerance: 0 }, 
+                        feedback: { correct: "Kuat sekali!", wrong: "Rumus: I = Gaya x Waktu" }, 
+                        explanation: "I = 200 N * 5 s = 1000 N.s" 
+                    } 
+                },
+
+                // LEVEL 3: HITUNGAN GAYA IMPULSIF - MEDIUM-MUDAH
+                { 
+                    id: 3, x: 3000, type: 'calc', visual: 'spike', 
+                    question: "Benda bermassa 2 kg jatuh ke lantai dengan kecepatan 10 m/s dan berhenti dalam waktu 0,1 detik. Hitung GAYA rata-rata (N) yang diterima lantai!", 
+                    sim: {}, 
+                    options: { 
+                        input: { correctValue: 200, tolerance: 5 }, 
+                        feedback: { 
+                            correct: "Hebat! F = I / Δt", 
+                            wrong: "Rumus: F = (m . Δv) / Δt" 
+                        },
+                        explanation: "Impuls (I) = m.Δv = 2.10 = 20. Gaya (F) = I/t = 20/0.1 = 200 N."
+                    } 
+                },
+
+                // LEVEL 4: TUMBUKAN TIDAK LENTING (MOBIL & BECAK) - MEDIUM
+                { 
+                    id: 4, x: 4000, type: 'calc', visual: 'accident', 
                     question: "Sebuah mobil bermassa 2000 kg melaju dengan kecepatan 120 km/jam, menabrak sebuah becak bermassa 500 kg yang diam. Berapa kecepatan mobil dan becak setelah tumbukan? (km/jam)", 
                     sim: {
                         type: 'image',
@@ -705,61 +744,22 @@
                     } 
                 },
 
-                // LEVEL 2: HITUNGAN GAYA IMPULSIF - SMA KELAS 11
+                // LEVEL 5: TUMBUKAN TIDAK LENTING SEMPURNA - SMA KELAS 11 - MEDIUM-SULIT
                 { 
-                    id: 2, x: 2000, type: 'calc', visual: 'spike', 
-                    question: "Benda bermassa 2 kg jatuh ke lantai dengan kecepatan 10 m/s dan berhenti dalam waktu 0,1 detik. Hitung GAYA rata-rata (N) yang diterima lantai!", 
+                    id: 5, x: 5000, type: 'calc', visual: 'mud', 
+                    question: "Sebuah bola bermassa 3 kg bergerak dengan kecepatan 8 m/s menabrak bola lain yang bermassa 2 kg yang bergerak berlawanan arah dengan kecepatan 4 m/s. Jika kedua bola melekat setelah tumbukan, hitung kecepatan akhir kedua bola tersebut (m/s)!", 
                     sim: {}, 
                     options: { 
-                        input: { correctValue: 200, tolerance: 5 }, 
+                        input: { correctValue: 3.2, tolerance: 0.2 }, 
                         feedback: { 
-                            correct: "Hebat! F = I / Δt", 
-                            wrong: "Rumus: F = (m . Δv) / Δt" 
+                            correct: "Hebat! Momentum terjaga! I = Δp", 
+                            wrong: "Gunakan Hukum Kekekalan Momentum untuk tumbukan tidak lenting." 
                         },
-                        explanation: "Impuls (I) = m.Δv = 2.10 = 20. Gaya (F) = I/t = 20/0.1 = 200 N."
+                        explanation: "m1v1 + m2v2 = (m1+m2)v'. (3×8) + (2×(-4)) = (3+2)v'. 24 - 8 = 5v'. v' = 3.2 m/s"
                     } 
                 },
 
-                // LEVEL 3: HITUNGAN MOMENTUM DASAR (p = mv)
-                { 
-                    id: 3, x: 3000, type: 'calc', visual: 'river', 
-                    question: "Jembatan putus! Mobil bermassa 1.500 kg melaju dengan kecepatan 20 m/s. Hitung momentum mobil tersebut!", 
-                    sim: {}, 
-                    options: { 
-                        input: { correctValue: 30000, tolerance: 0 }, 
-                        feedback: { correct: "Tepat! P = m.v", wrong: "Rumus: p = massa x kecepatan" }, 
-                        explanation: "p = 1500 kg * 20 m/s = 30.000 kg.m/s" 
-                    } 
-                },
-
-                // LEVEL 4: HITUNGAN IMPULS DASAR (I = F.dt)
-                { 
-                    id: 4, x: 4000, type: 'calc', visual: 'cliff', 
-                    question: "Tebing Es! Tahan tubuhmu dengan gaya 200 N selama 5 detik agar tidak jatuh. Berapa IMPULS yang kamu kerjakan?", 
-                    sim: {}, 
-                    options: { 
-                        input: { correctValue: 1000, tolerance: 0 }, 
-                        feedback: { correct: "Kuat sekali!", wrong: "Rumus: I = Gaya x Waktu" }, 
-                        explanation: "I = 200 N * 5 s = 1000 N.s" 
-                    } 
-                },
-
-                // LEVEL 5: TEOREMA IMPULS-MOMENTUM - UBAH KE ESAI
-                { 
-                    id: 5, x: 5000, type: 'text-input', visual: 'mud', 
-                    question: "Konsep Fisika: Menurut Teorema Impuls-Momentum, Impuls yang dikerjakan pada benda sama dengan perubahan besaran apa?", 
-                    sim: {}, 
-                    options: { 
-                        keywords: ["momentum", "p", "gerak"], 
-                        feedback: { 
-                            correct: "100 buat kamu! I = Δp", 
-                            wrong: "Besaran yang merupakan hasil kali massa dan kecepatan." 
-                        },
-                        explanation: "Impuls adalah perubahan Momentum."
-                    } 
-                },
-
-                // LEVEL 6: TUMBUKAN TIDAK LENTING (Menempel)
+                // LEVEL 6: TUMBUKAN TIDAK LENTING (Menempel) - SULIT
                 { 
                     id: 6, x: 6000, type: 'calc', visual: 'truck', 
                     question: "Mobil A (2kg, 8m/s) menabrak Truk B (4kg, diam) dan MENEMPEL. Hitung kecepatan akhirnya (v')!", 
@@ -771,7 +771,7 @@
                     } 
                 },
 
-                // LEVEL 7: RECOIL / LEDAKAN (Aksi-Reaksi)
+                // LEVEL 7: RECOIL / LEDAKAN (Aksi-Reaksi) - SULIT
                 { 
                     id: 7, x: 7000, type: 'calc', visual: 'croc', 
                     question: "Di atas rakit (20kg) diam. Kamu (50kg) lompat ke depan v=4 m/s. Berapa kecepatan rakit MUNDUR? (tulis angkanya saja)", 
@@ -783,7 +783,7 @@
                     } 
                 },
 
-                // LEVEL 8: IMPULS VEKTOR (Memantul Balik)
+                // LEVEL 8: IMPULS VEKTOR (Memantul Balik) - SANGAT SULIT
                 { 
                     id: 8, x: 8000, type: 'calc', visual: 'wall', 
                     question: "Bola 0,5 kg menumbuk tembok v=10 m/s, memantul balik v=-10 m/s dalam 0,1 detik. Hitung GAYA rata-ratanya (N)!", 
@@ -795,7 +795,7 @@
                     } 
                 },
 
-                // LEVEL 9: TUMBUKAN LENTING SEMPURNA (Simulasi Kompleks) - Paling Susah
+                // LEVEL 9: TUMBUKAN LENTING SEMPURNA (Simulasi Kompleks) - PALING SULIT
                 // Menggunakan visual Bumper Car karena relevan dengan lenting
                 { 
                     id: 9, x: 9000, type: 'calc-multi', visual: 'bumper', 
@@ -808,7 +808,7 @@
                         ], 
                         feedback: { 
                             correct: "Sempurna! Kamu telah menaklukkan materi Momentum!", 
-                            wrong: "Gunakan rumus panjang: v1' = ((m1-m2)v1 + 2m2v2) / (m1+m2)" 
+                            wrong: "Petunjuk Rumus Tumbukan Lenting Sempurna: v1' = ((m1-m2)v1 + 2m2v2) / (m1+m2) dan v2' = ((m2-m1)v2 + 2m1v1) / (m1+m2)" 
                         } 
                     } 
                 },
