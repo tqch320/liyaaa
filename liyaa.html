@@ -1954,7 +1954,7 @@
                     const expectedV1 = ((m1 - m2) * v1 + 2 * m2 * v2) / (m1 + m2);
                     const expectedV2 = ((m2 - m1) * v2 + 2 * m1 * v1) / (m1 + m2);
                     
-                    // Format Kunci Jawaban untuk Laporan
+                    // Format Kunci Jawaban untuk Laporan (tetap direkam, tapi jangan tampilkan ke pemain)
                     correctAnswerDisplay = `v1'=${expectedV1.toFixed(2)}, v2'=${expectedV2.toFixed(2)}`;
                     
                     // Validasi
@@ -1962,7 +1962,9 @@
                     if(isNaN(userV2) || Math.abs(userV2 - expectedV2) > 0.1) allCorrect = false;
                     
                     if (!allCorrect) {
-                        feedbackText = `Jawaban seharusnya: ${correctAnswerDisplay}`;
+                        // Jangan tampilkan jawaban numerik secara langsung ke pemain.
+                        // Tampilkan petunjuk rumus yang sudah didefinisikan di cp.options.feedback.wrong
+                        feedbackText = (cp.options && cp.options.feedback && cp.options.feedback.wrong) ? cp.options.feedback.wrong : "Petunjuk: gunakan rumus tumbukan lenting untuk menghitung v1' dan v2'";
                     }
                 }
                 if (allCorrect) { correct = true; feedbackText = cp.options.feedback.correct; }
