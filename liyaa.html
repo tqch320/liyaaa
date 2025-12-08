@@ -687,15 +687,21 @@
             gates: [],
             // --- URUTAN LEVEL BARU (MUDAH -> SUSAH) ---
             checkpoints: [
-                // LEVEL 1: HITUNGAN MOMENTUM DASAR (p = mv) - PALING MUDAH
+                // LEVEL 1: MOMENTUM VECTOR (SMA KELAS 11) - MUDAH-MEDIUM
                 { 
-                    id: 1, x: 1000, type: 'calc', visual: 'river', 
-                    question: "Jembatan putus! Mobil bermassa 1.500 kg melaju dengan kecepatan 20 m/s. Hitung momentum mobil tersebut!", 
-                    sim: {}, 
+                    id: 1, x: 1000, type: 'calc', visual: 'diagram', 
+                    question: "Dua buah bola masing-masing mempunyai massa 2 kg dan 3 kg. Bola pertama bergerak ke utara dengan 4 m/s dan bola kedua ke barat dengan 10 m/s. Berapakah besar momentum total kedua benda tersebut?", 
+                    sim: {
+                        type: 'image',
+                        src: 'assets/level1-diagram.png'
+                    }, 
                     options: { 
-                        input: { correctValue: 30000, tolerance: 0 }, 
-                        feedback: { correct: "Tepat! P = m.v", wrong: "Rumus: p = massa x kecepatan" }, 
-                        explanation: "p = 1500 kg * 20 m/s = 30.000 kg.m/s" 
+                        input: { correctValue: 31.05, tolerance: 0.2 }, 
+                        feedback: { 
+                            correct: "Betul! Hitung komponen momentum masing-masing lalu jumlahkan, kemudian hitung besar P_total.", 
+                            wrong: "Ingat: momentum adalah vektor p = m·v. Jumlahkan komponen x dan y, lalu hitung besar vektor: P = sqrt(px^2 + py^2)."
+                        },
+                        explanation: "Perhitungan: p1 = 2 kg × 4 m/s = 8 kg·m/s (utara → komponen y = +8). p2 = 3 kg × 10 m/s = 30 kg·m/s (barat → komponen x = -30). P_total = sqrt((-30)^2 + 8^2) = sqrt(964) ≈ 31.05 kg·m/s."
                     } 
                 },
 
